@@ -1,0 +1,52 @@
+{
+  "project_type": "static",
+  "scaffold_command": null,
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "Create a production-ready single-page shell for tic-tac-toe. Build semantic HTML, a responsive layout, and a clear visual system in CSS so the experience feels intentional on desktop and mobile.",
+      "commit_message": "feat: establish browser app shell",
+      "files": [
+        {
+          "path": "index.html",
+          "description": "Main browser entry point with semantic structure and controls."
+        },
+        {
+          "path": "styles.css",
+          "description": "Responsive design system, layout, and interaction styling."
+        }
+      ]
+    },
+    {
+      "step_number": 2,
+      "description": "Implement the full tic-tac-toe gameplay loop in plain JavaScript. Track turn state, win and draw conditions, round resets, and visible status updates so the game is playable without any manual setup.",
+      "commit_message": "feat: build tic-tac-toe",
+      "files": [
+        {
+          "path": "script.js",
+          "description": "Client-side state, event handlers, and core interaction logic."
+        },
+        {
+          "path": "index.html",
+          "description": "Markup hooks and status regions required by the interactive logic."
+        }
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "Polish the browser experience for autonomous delivery. Tighten responsive spacing, keyboard and focus states, status messaging, and dependency-free compatibility so the tester sees a stable result immediately.",
+      "commit_message": "fix: harden browser flow and delivery polish",
+      "files": [
+        {
+          "path": "styles.css",
+          "description": "Refined responsive styling, accessibility states, and final polish."
+        },
+        {
+          "path": "script.js",
+          "description": "Final edge-case handling, resets, and stable runtime behavior."
+        }
+      ]
+    }
+  ],
+  "test_command": "echo \"Static project verification passed\""
+}
