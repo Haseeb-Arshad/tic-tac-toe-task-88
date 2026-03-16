@@ -5,122 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="A polished, responsive Tic-Tac-Toe game shell with support for local play, AI difficulty, online mode, score tracking, and replay-ready structure."
+      content="A polished tic-tac-toe game with player-vs-player and player-vs-computer modes."
     />
-    <title>Tic-Tac-Toe • Neon Grid</title>
+    <title>Tic-Tac-Toe</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
-    <div class="page-shell">
-      <header class="topbar" aria-label="Game header">
-        <div class="brand">
-          <p class="eyebrow">Arcade Classic</p>
-          <h1>Tic-Tac-Toe</h1>
-          <p class="subtitle">Fast rounds, smart opponents, clean interface.</p>
-        </div>
-
-        <div class="topbar-actions" aria-label="Global actions">
-          <button type="button" class="btn btn-secondary">How to Play</button>
-          <button type="button" class="btn btn-primary">Start New Match</button>
-        </div>
+    <main class="app" aria-labelledby="game-title">
+      <header class="app__header">
+        <h1 id="game-title">Tic-Tac-Toe</h1>
+        <p class="app__subtitle">Pick a mode, choose difficulty, and play instantly.</p>
       </header>
 
-      <main class="layout" aria-label="Tic-Tac-Toe app">
-        <section class="panel settings" aria-labelledby="settings-title">
-          <h2 id="settings-title">Match Settings</h2>
+      <section class="panel panel--controls" aria-label="Game controls">
+        <div class="field-group">
+          <label for="modeSelect">Mode</label>
+          <select id="modeSelect" name="mode">
+            <option value="ai" selected>Player vs AI</option>
+            <option value="pvp">Player vs Player</option>
+          </select>
+        </div>
 
-          <form class="control-grid" aria-label="Game configuration">
-            <label class="control-group" for="mode-select">
-              <span>Mode</span>
-              <select id="mode-select" name="mode">
-                <option value="ai" selected>Player vs AI</option>
-                <option value="local">Player vs Player (Local)</option>
-                <option value="online">Online Multiplayer</option>
-              </select>
-            </label>
+        <div class="field-group" id="difficultyGroup">
+          <label for="difficultySelect">Difficulty</label>
+          <select id="difficultySelect" name="difficulty">
+            <option value="easy">Easy (Random)</option>
+            <option value="medium" selected>Medium (Strategic)</option>
+            <option value="hard">Hard (Unbeatable)</option>
+          </select>
+        </div>
 
-            <label class="control-group" for="difficulty-select">
-              <span>Difficulty</span>
-              <select id="difficulty-select" name="difficulty">
-                <option value="easy">Easy (Random)</option>
-                <option value="medium" selected>Medium (Strategic)</option>
-                <option value="hard">Hard (Unbeatable)</option>
-              </select>
-            </label>
+        <div class="button-row">
+          <button id="newRoundBtn" type="button">New Round</button>
+          <button id="resetMatchBtn" type="button">Reset Match</button>
+        </div>
+      </section>
 
-            <label class="control-group" for="theme-select">
-              <span>Theme</span>
-              <select id="theme-select" name="theme">
-                <option value="neon" selected>Neon Grid</option>
-                <option value="minimal">Minimal Light</option>
-                <option value="midnight">Midnight Contrast</option>
-              </select>
-            </label>
+      <section class="panel panel--status" aria-live="polite" aria-atomic="true">
+        <p id="statusMessage">Loading game…</p>
+        <p id="roundLabel">Round 1</p>
+      </section>
 
-            <label class="control-group" for="sound-select">
-              <span>Sound</span>
-              <select id="sound-select" name="sound">
-                <option value="on" selected>On</option>
-                <option value="off">Off</option>
-              </select>
-            </label>
-          </form>
+      <section class="panel panel--scores" aria-label="Scoreboard">
+        <h2>Scoreboard</h2>
+        <ul class="scores">
+          <li>
+            <span id="scoreXLabel">Player X</span>
+            <strong id="scoreX">0</strong>
+          </li>
+          <li>
+            <span id="scoreOLabel">Computer (O)</span>
+            <strong id="scoreO">0</strong>
+          </li>
+          <li>
+            <span>Draws</span>
+            <strong id="scoreDraws">0</strong>
+          </li>
+        </ul>
+      </section>
 
-          <div class="settings-actions">
-            <button type="button" class="btn btn-ghost">Reset Board</button>
-            <button type="button" class="btn btn-ghost">Reset Scores</button>
-          </div>
-        </section>
-
-        <section class="panel game" aria-labelledby="game-title">
-          <div class="game-header">
-            <h2 id="game-title">Current Round</h2>
-            <p class="status" aria-live="polite">Player X to move</p>
-          </div>
-
-          <div class="round-meta" aria-label="Round summary">
-            <p><strong>Round:</strong> 1 of 5</p>
-            <p><strong>Time:</strong> 00:00</p>
-          </div>
-
-          <section class="board" role="grid" aria-label="Tic-Tac-Toe board">
-            <button type="button" class="cell" role="gridcell" aria-label="Cell 1"></button>
-            <button type="button" class="cell" role="gridcell" aria-label="Cell 2"></button>
-            <button type="button" class="cell" role="gridcell" aria-label="Cell 3"></button>
-            <button type="button" class="cell" role="gridcell" aria-label="Cell 4"></button>
-            <button type="button" class="cell" role="gridcell" aria-label="Cell 5"></button>
-            <button type="button" class="cell" role="gridcell" aria-label="Cell 6"></button>
-            <button type="button" class="cell" role="gridcell" aria-label="Cell 7"></button>
-            <button type="button" class="cell" role="gridcell" aria-label="Cell 8"></button>
-            <button type="button" class="cell" role="gridcell" aria-label="Cell 9"></button>
-          </section>
-
-          <p class="helper-text">
-            Tip: Keyboard users can tab through board cells and activate with Enter/Space.
-          </p>
-        </section>
-
-        <aside class="panel sidebar" aria-label="Scoreboard and history">
-          <section class="scoreboard" aria-labelledby="score-title">
-            <h2 id="score-title">Scoreboard</h2>
-            <ul class="score-list">
-              <li><span>Player X</span><strong>0</strong></li>
-              <li><span>Player O</span><strong>0</strong></li>
-              <li><span>Draws</span><strong>0</strong></li>
-            </ul>
-            <p class="muted">First to 3 wins takes the match.</p>
-          </section>
-
-          <section class="history" aria-labelledby="history-title">
-            <h2 id="history-title">Recent Rounds</h2>
-            <ol class="history-list">
-              <li><span>Round 1</span><em>Waiting to start</em></li>
-              <li><span>Round 2</span><em>Waiting to start</em></li>
-              <li><span>Round 3</span><em>Waiting to start</em></li>
-            </ol>
-          </section>
-        </aside>
-      </main>
-    </div>
+      <section class="panel panel--board" aria-label="Tic-tac-toe board">
+        <div class="board" id="gameBoard" role="grid" aria-label="3 by 3 tic-tac-toe board">
+          <button class="cell" type="button" role="gridcell" data-index="0" aria-label="Cell 1"></button>
+          <button class="cell" type="button" role="gridcell" data-index="1" aria-label="Cell 2"></button>
+          <button class="cell" type="button" role="gridcell" data-index="2" aria-label="Cell 3"></button>
+          <button class="cell" type="button" role="gridcell" data-index="3" aria-label="Cell 4"></button>
+          <button class="cell" type="button" role="gridcell" data-index="4" aria-label="Cell 5"></button>
+          <button class="cell" type="button" role="gridcell" data-index="5" aria-label="Cell 6"></button>
+          <button class="cell" type="button" role="gridcell" data-index="6" aria-label="Cell 7"></button>
+          <button class="cell" type="button" role="gridcell" data-index="7" aria-label="Cell 8"></button>
+          <button class="cell" type="button" role="gridcell" data-index="8" aria-label="Cell 9"></button>
+        </div>
+      </section>
+    </main>
   </body>
 </html>
